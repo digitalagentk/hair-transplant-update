@@ -7,6 +7,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/hair-transplant-update/proj_hair_transplant_3_up/',
   plugins: [
     vue(),
     vueDevTools(),
