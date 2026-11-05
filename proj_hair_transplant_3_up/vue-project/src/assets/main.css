@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Tajawal", "Cairo", "Readex Pro", ui-sans-serif, system-ui, sans-serif;
+  --color-aqua: #f0f9fa;
+}
+
+@layer base {
+  html {
+    direction: rtl;
+    font-size: 16.5px;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-aqua font-medium text-slate-900 antialiased;
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+  :focus-visible {
+    outline: 2px solid #14b8a6;
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: #14b8a6;
+    color: #fff;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-teal-600 to-slate-900 px-6 py-3 text-base font-bold text-white shadow-lg shadow-teal-900/30 transition duration-300 hover:scale-[1.03] hover:shadow-[0_0_28px_rgba(20,184,166,0.55)] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100;
+  }
+  .btn-glass {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-white/25 bg-white/5 px-6 py-3 text-base font-bold text-white backdrop-blur transition duration-300 hover:scale-[1.03] hover:border-teal-300/60 hover:bg-white/10;
+  }
+  .field {
+    @apply block min-h-[44px] w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 transition placeholder:text-slate-400 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/40;
+  }
+  .field-invalid {
+    @apply border-red-400 focus:border-red-500 focus:ring-red-400/40;
+  }
+  .field-label {
+    @apply mb-2 block text-sm font-bold text-slate-900;
+  }
+  .field-error {
+    @apply mt-1.5 text-sm font-medium text-red-600;
+  }
+  .eyebrow {
+    @apply inline-flex items-center rounded-full border border-teal-500/30 bg-teal-500/10 px-4 py-1.5 text-sm font-bold text-teal-600;
+  }
+}
+
+/* ---------- Page transition (0.4s) ---------- */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(16px);
+}
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* ---------- Animations ---------- */
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.float-card { animation: floatCard 6s ease-in-out infinite; }
+.float-login { animation: floatCard 7s ease-in-out infinite; }
+
+@keyframes haloPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+.halo { animation: haloPulse 5s ease-in-out infinite; }
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+.pop-in { animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@keyframes drawCheck {
+  to { stroke-dashoffset: 0; }
+}
+.draw-check {
+  stroke-dasharray: 32;
+  stroke-dashoffset: 32;
+  animation: drawCheck 0.6s 0.25s ease forwards;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
